@@ -1,0 +1,70 @@
+package com.fsd.core.services.libraryservice.services;
+
+import com.fsd.core.services.libraryservice.entity.UserEntity;
+import com.fsd.core.services.libraryservice.exception.MyResourceNotFoundException;
+import com.fsd.core.services.libraryservice.models.dto.UserDTO;
+import com.fsd.core.services.libraryservice.repo.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.fsd.core.services.libraryservice.transformers.UserTransformer.toUserDTO;
+import static com.fsd.core.services.libraryservice.transformers.UserTransformer.toUserEntity;
+
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    UserRepository userRepository;
+
+    public UserDTO findUserByName(String userName) {
+        return toUserDTO(userRepository.findByUsername(userName));
+    }
+
+    public List<UserDTO> findAll() {
+        return userRepository.findAll().stream().map(userEntity -> {
+            return toUserDTO(userEntity);
+        }).collect(Collectors.toList());
+    }
+
+    public Page<UserDTO> findWithPagination(int page, int size) {
+        Page<UserDTO> dtoPage = userRepository.findAll(new PageRequest(page, size)).map(new Converter<UserEntity, UserDTO>() {
+            @Override
+            public UserDTO convert(UserEntity userEntity) {
+                return toUserDTO(userEntity);
+            }
+        });
+        if (page > dtoPage.getTotalPages()) {
+            throw new MyResourceNotFoundException();
+        }
+        return dtoPage;
+    }
+
+    public UserDTO findById(Integer id) {
+        return toUserDTO(userRepository.findOne(id));
+    }
+
+    @Override
+    public UserDTO create(UserDTO userDTO) {
+        return toUserDTO(userRepository.save(toUserEntity(userDTO)));
+    }
+
+    @Override
+    public UserDTO update(UserDTO userDTO) {
+        UserEntity userEntity = userRepository.findByUsername(userDTO.getUsername());
+        userEntity.setPassword(userDTO.getPassword());
+        userEntity.setUseremail(userDTO.getUseremail());
+        userEntity.setRole(userDTO.getRole());
+        //Add updatable fields here
+        return toUserDTO(userRepository.save(userEntity));
+    }
+
+    @Override
+    public UserDTO delete(UserDTO userDTO) {
+        userRepository.delete(userDTO.getId());
+        return userDTO;
+    }
+}

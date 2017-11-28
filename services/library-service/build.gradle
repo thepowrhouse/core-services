@@ -32,6 +32,10 @@ jar {
 dependencies {
     //compile("org.springframework.security.oauth:spring-security-oauth2:${oauth2Version}")
     //compile("org.springframework.security:spring-security-jwt:${jwtVersion}")
+	compile 'org.hibernate:hibernate-core:5.0.7.Final'
+	compile 'org.hibernate:hibernate-validator:5.5.5.Final'
+	compile 'mysql:mysql-connector-java:5.1.38'
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 }
 
 dependencyManagement {
