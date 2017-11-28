@@ -61,6 +61,9 @@ allprojects {
         // for VND errors
         compile("org.springframework.boot:spring-boot-starter-hateoas")
 
+        //Lombok
+        compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
+
 		testCompile('org.springframework.boot:spring-boot-starter-test')
 		testCompile('junit:junit')
 	}

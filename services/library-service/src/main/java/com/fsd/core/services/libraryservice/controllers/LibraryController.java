@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class LibraryController {
 
-    private static final Logger log = LoggerFactory.getLogger(LibraryController.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private static final String LIBRARY_CONTROLLER = "LibraryController";
 
@@ -44,7 +44,7 @@ public class LibraryController {
     @RequestMapping(value = "/books",method = RequestMethod.GET)
     public BookResponseDTO findBookByName(@RequestParam(required = true) String bookName) {
 
-        log.info("Get Book for Name : {} ", bookName);
+        logger.info("Get Book for Name : {} ", bookName);
 
         return libraryService.findBookByName(bookName);
     }
