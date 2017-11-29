@@ -4,6 +4,7 @@ import com.fsd.core.services.libraryservice.models.dto.BookResponseDTO;
 import com.fsd.core.services.libraryservice.services.LibraryService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.jsondoc.core.annotation.ApiBodyObject;
 import org.jsondoc.core.annotation.ApiMethod;
 import org.jsondoc.core.annotation.ApiParams;
 import org.jsondoc.core.annotation.ApiQueryParam;
@@ -47,6 +48,17 @@ public class LibraryController {
         return libraryService.findBookByTitle(title);
     }
 
+    // Create Book
+    @ApiBodyObject(clazz = BookResponseDTO.class)
+    @ApiMethod(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Response OK", response = BookResponseDTO.class),
+            @ApiResponse(code = 400, message = "Input Exception", response = VndErrors.class),
+            @ApiResponse(code = 401, message = "Unauthorized Exception", response = VndErrors.class),
+            @ApiResponse(code = 404, message = "Resource Not Found Exception", response = VndErrors.class),
+            @ApiResponse(code = 500, message = "Internal Service Exception", response = VndErrors.class)
+
+    })
     //@PreAuthorize("#oauth2.hasScope('Admin')")
     @RequestMapping(value = "/books", method = POST, produces = "application/json")
     public BookResponseDTO create(@RequestBody BookResponseDTO book) {
