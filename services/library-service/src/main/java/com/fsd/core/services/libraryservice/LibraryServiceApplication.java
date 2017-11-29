@@ -14,7 +14,7 @@ import org.springframework.util.SocketUtils;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 //Enable the Below for Auth
 //@EnableResourceServer
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
