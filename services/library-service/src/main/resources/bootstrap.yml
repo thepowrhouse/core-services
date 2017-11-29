@@ -33,3 +33,10 @@ spring:
         password: '{cipher}3fb2a2a25d3143ee052178842685af1a49a6e4d926c8bf44f8160c3609f7d1b6'
 server:
   port: 8080
+---
+spring:
+  jpa.hibernate.ddl-auto: create
+  datasource:
+    url: jdbc:mysql://139.126.84.83:3306/fsd
+    username: fsd
+    password: fsd

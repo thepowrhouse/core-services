@@ -12,13 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.VndErrors;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping("/")
 public class LibraryController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -29,7 +27,7 @@ public class LibraryController {
     LibraryService libraryService;
 
     // Get Book
-    @ApiParams(queryparams = { @ApiQueryParam(name = "bookName", description = "Book Name", required = true)})
+    @ApiParams(queryparams = {@ApiQueryParam(name = "bookName", description = "Book Name", required = true)})
     @ApiMethod(produces = MediaType.APPLICATION_JSON_VALUE)
 
     @ApiResponses(value = {
@@ -40,12 +38,18 @@ public class LibraryController {
             @ApiResponse(code = 500, message = "Internal Service Exception", response = VndErrors.class)
 
     })
-    //@PreAuthorize("#oauth2.hasScope('Ticketing')")
-    @RequestMapping(value = "/books",method = RequestMethod.GET)
-    public BookResponseDTO findBookByName(@RequestParam(required = true) String bookName) {
+    //@PreAuthorize("#oauth2.hasScope('Admin')")
+    @RequestMapping(value = "/books", method = RequestMethod.GET)
+    public BookResponseDTO findBookByName(@RequestParam(required = true) String title) {
 
-        logger.info("Get Book for Name : {} ", bookName);
+        logger.info("Get Book for Name : {} ", title);
 
-        return libraryService.findBookByName(bookName);
+        return libraryService.findBookByName(title);
+    }
+
+    //@PreAuthorize("#oauth2.hasScope('Admin')")
+    @RequestMapping(value = "/books", method = POST, produces = "application/json")
+    public BookResponseDTO create(@RequestBody BookResponseDTO book) {
+        return libraryService.save(book);
     }
 }
