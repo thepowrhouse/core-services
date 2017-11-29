@@ -1,6 +1,19 @@
 version: '3'
 
 services:
+  library:
+    image: fsdapps/library-service:0.0.1-SNAPSHOT
+    container_name: library
+    ports:
+    - 8080:8080
+    environment:
+    - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    - SPRING_PROFILES_ACTIVE=docker
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
   mysql:
     image: mysql
     container_name: mysql-db

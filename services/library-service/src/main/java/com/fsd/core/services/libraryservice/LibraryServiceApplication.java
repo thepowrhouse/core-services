@@ -36,24 +36,4 @@ public class LibraryServiceApplication
     RestTemplate restTemplate() {
         return new RestTemplate();
     }
-
-    @Bean
-    public EmbeddedServletContainerCustomizer containerCustomizer() {
-        return (container -> {
-            try {
-                // use defaults if we can't talk to config server
-                Integer minPort = env.getProperty("minPort") != null ? Integer.parseInt(env.getProperty("minPort"))
-                        : 7500;
-                Integer maxPort = env.getProperty("maxPort") != null ? Integer.parseInt(env.getProperty("maxPort"))
-                        : 9500;
-                int port = SocketUtils.findAvailableTcpPort(minPort, maxPort);
-                System.getProperties().put("server.port", port);
-                container.setPort(port);
-            } catch (Exception e) {
-                log.error("Error occured while reading the min & max port properties : " + e);
-
-            }
-
-        });
-    }
 }
