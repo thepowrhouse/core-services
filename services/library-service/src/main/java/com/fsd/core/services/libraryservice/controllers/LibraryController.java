@@ -44,7 +44,7 @@ public class LibraryController {
 
         logger.info("Get Book for Name : {} ", title);
 
-        return libraryService.findBookByName(title);
+        return libraryService.findBookByTitle(title);
     }
 
     //@PreAuthorize("#oauth2.hasScope('Admin')")

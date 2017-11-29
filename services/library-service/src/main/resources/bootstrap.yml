@@ -37,6 +37,6 @@ server:
 spring:
   jpa.hibernate.ddl-auto: create
   datasource:
-    url: jdbc:mysql://139.126.84.83:3306/fsd
+    url: jdbc:mysql://mysql:3306/fsd
     username: fsd
     password: fsd
