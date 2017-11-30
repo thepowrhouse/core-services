@@ -47,14 +47,14 @@ public class LibraryController {
         return libraryService.findBookByName(bookName);
     }
 
-    @PostMapping("/issueBook")
+    @PostMapping("/books/issueBook")
     public ResponseEntity<IssueBookResponse> issueBook(@RequestBody(required = true) IssueBookRequest issueBookRequest) {
         libraryService.issueBook(issueBookRequest.getBookId(), issueBookRequest.getUserId());
 
         return ResponseEntity.ok().body(new IssueBookResponse(issueBookRequest.getUserId(), issueBookRequest.getBookId()));
     }
 
-    @PostMapping("/releaseBook")
+    @PostMapping("/books/releaseBook")
     public ResponseEntity<ReleaseBookResponse> releaseBook(@RequestBody ReleaseBookRequest releaseBookRequest) {
         libraryService.issueBook(releaseBookRequest.getBookId(), releaseBookRequest.getUserId());
         return ResponseEntity.ok().body(new ReleaseBookResponse(releaseBookRequest.getUserId(), releaseBookRequest.getBookId()));

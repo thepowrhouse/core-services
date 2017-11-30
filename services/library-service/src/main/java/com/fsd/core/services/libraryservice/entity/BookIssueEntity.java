@@ -1,6 +1,7 @@
 package com.fsd.core.services.libraryservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -12,6 +13,7 @@ import java.util.Date;
 /**
  * Created by fayaz on 28-11-2017.
  */
+@Data
 @Entity
 @Table(name = "BOOK_ISSUES")
 @EntityListeners(AuditingEntityListener.class)
@@ -52,77 +54,4 @@ public class BookIssueEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public BookEntity getBookEntity() {
-        return bookEntity;
-    }
-
-    public void setBookEntity(BookEntity bookEntity) {
-        this.bookEntity = bookEntity;
-    }
-
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-
-    public Date getIssuedOn() {
-        return issuedOn;
-    }
-
-    public void setIssuedOn(Date issuedOn) {
-        this.issuedOn = issuedOn;
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public Date getReturnedDate() {
-        return returnedDate;
-    }
-
-    public void setReturnedDate(Date returnedDate) {
-        this.returnedDate = returnedDate;
-    }
-
-    public Integer getFine() {
-        return fine;
-    }
-
-    public void setFine(Integer fine) {
-        this.fine = fine;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }
