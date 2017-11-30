@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 import static com.fsd.core.services.libraryservice.transformers.UserTransformer.toUserDTO;
 import static com.fsd.core.services.libraryservice.transformers.UserTransformer.toUserEntity;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired

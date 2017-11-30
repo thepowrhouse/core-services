@@ -1,6 +1,6 @@
 package com.fsd.core.services.libraryservice.models.dto;
 
-import org.joda.time.DateTime;
+import java.util.Date;
 
 /**
  * Created by fayaz on 29-11-2017.
@@ -10,10 +10,12 @@ public class UserIssuesDTO {
     private Integer id;
     private Integer bookId;
     private String bookName;
-    DateTime issuedOn;
-    DateTime dueDate;
-    DateTime returnedDate;
+    Date issuedOn;
+    Date dueDate;
+    Date returnedDate;
     Integer fine;
+    private Date createdAt;
+    private Date updatedAt;
 
     public Integer getId() {
         return id;
@@ -39,27 +41,27 @@ public class UserIssuesDTO {
         this.bookName = bookName;
     }
 
-    public DateTime getIssuedOn() {
+    public Date getIssuedOn() {
         return issuedOn;
     }
 
-    public void setIssuedOn(DateTime issuedOn) {
+    public void setIssuedOn(Date issuedOn) {
         this.issuedOn = issuedOn;
     }
 
-    public DateTime getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(DateTime dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 
-    public DateTime getReturnedDate() {
+    public Date getReturnedDate() {
         return returnedDate;
     }
 
-    public void setReturnedDate(DateTime returnedDate) {
+    public void setReturnedDate(Date returnedDate) {
         this.returnedDate = returnedDate;
     }
 
@@ -69,5 +71,21 @@ public class UserIssuesDTO {
 
     public void setFine(Integer fine) {
         this.fine = fine;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

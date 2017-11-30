@@ -1,6 +1,6 @@
 package com.fsd.core.services.libraryservice.controllers;
 
-import com.fsd.core.services.libraryservice.models.dto.BookResponseDTO;
+import com.fsd.core.services.libraryservice.models.dto.*;
 import com.fsd.core.services.libraryservice.services.LibraryService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -12,10 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.VndErrors;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
@@ -47,5 +45,18 @@ public class LibraryController {
         logger.info("Get Book for Name : {} ", bookName);
 
         return libraryService.findBookByName(bookName);
+    }
+
+    @PostMapping("/issueBook")
+    public ResponseEntity<IssueBookResponse> issueBook(@RequestBody(required = true) IssueBookRequest issueBookRequest) {
+        libraryService.issueBook(issueBookRequest.getBookId(), issueBookRequest.getUserId());
+
+        return ResponseEntity.ok().body(new IssueBookResponse(issueBookRequest.getUserId(), issueBookRequest.getBookId()));
+    }
+
+    @PostMapping("/releaseBook")
+    public ResponseEntity<ReleaseBookResponse> releaseBook(@RequestBody ReleaseBookRequest releaseBookRequest) {
+        libraryService.issueBook(releaseBookRequest.getBookId(), releaseBookRequest.getUserId());
+        return ResponseEntity.ok().body(new ReleaseBookResponse(releaseBookRequest.getUserId(), releaseBookRequest.getBookId()));
     }
 }
