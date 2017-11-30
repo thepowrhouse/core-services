@@ -1,8 +1,8 @@
 package com.fsd.core.services.libraryservice.services;
 
-import com.fsd.core.services.libraryservice.entity.BookEntity;
-import com.fsd.core.services.libraryservice.entity.BookIssueEntity;
-import com.fsd.core.services.libraryservice.entity.UserEntity;
+import com.fsd.core.services.libraryservice.models.BookEntity;
+import com.fsd.core.services.libraryservice.models.BookIssueEntity;
+import com.fsd.core.services.libraryservice.models.UserEntity;
 import com.fsd.core.services.libraryservice.models.dto.BookResponseDTO;
 import com.fsd.core.services.libraryservice.repo.BookIssueRepository;
 import com.fsd.core.services.libraryservice.repo.BookRepository;

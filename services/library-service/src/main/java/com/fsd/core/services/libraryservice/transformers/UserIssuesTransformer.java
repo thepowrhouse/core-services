@@ -1,6 +1,6 @@
 package com.fsd.core.services.libraryservice.transformers;
 
-import com.fsd.core.services.libraryservice.entity.BookIssueEntity;
+import com.fsd.core.services.libraryservice.models.BookIssueEntity;
 import com.fsd.core.services.libraryservice.models.dto.UserIssuesDTO;
 
 /**

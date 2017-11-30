@@ -1,4 +1,4 @@
-package com.fsd.core.services.libraryservice.entity;
+package com.fsd.core.services.libraryservice.models;
 
 /**
  * Created by fayaz on 29-11-2017.

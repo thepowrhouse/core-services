@@ -1,6 +1,6 @@
 package com.fsd.core.services.libraryservice.services;
 
-import com.fsd.core.services.libraryservice.entity.UserEntity;
+import com.fsd.core.services.libraryservice.models.UserEntity;
 import com.fsd.core.services.libraryservice.exception.MyResourceNotFoundException;
 import com.fsd.core.services.libraryservice.models.dto.UserDTO;
 import com.fsd.core.services.libraryservice.repo.UserRepository;

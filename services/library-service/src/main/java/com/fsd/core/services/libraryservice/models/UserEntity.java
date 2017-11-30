@@ -1,4 +1,4 @@
-package com.fsd.core.services.libraryservice.entity;
+package com.fsd.core.services.libraryservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

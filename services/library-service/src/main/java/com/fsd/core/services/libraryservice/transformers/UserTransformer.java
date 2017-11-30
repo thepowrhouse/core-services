@@ -1,6 +1,6 @@
 package com.fsd.core.services.libraryservice.transformers;
 
-import com.fsd.core.services.libraryservice.entity.UserEntity;
+import com.fsd.core.services.libraryservice.models.UserEntity;
 import com.fsd.core.services.libraryservice.models.dto.UserDTO;
 
 import java.util.stream.Collectors;

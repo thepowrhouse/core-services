@@ -1,6 +1,6 @@
 package com.fsd.core.services.libraryservice.repo;
 
-import com.fsd.core.services.libraryservice.entity.BookEntity;
+import com.fsd.core.services.libraryservice.models.BookEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
