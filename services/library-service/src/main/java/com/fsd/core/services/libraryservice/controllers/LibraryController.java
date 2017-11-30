@@ -56,7 +56,7 @@ public class LibraryController {
 
     @PostMapping("/books/releaseBook")
     public ResponseEntity<ReleaseBookResponse> releaseBook(@RequestBody ReleaseBookRequest releaseBookRequest) {
-        libraryService.issueBook(releaseBookRequest.getBookId(), releaseBookRequest.getUserId());
+        libraryService.releaseBook(releaseBookRequest.getBookId(), releaseBookRequest.getUserId());
         return ResponseEntity.ok().body(new ReleaseBookResponse(releaseBookRequest.getUserId(), releaseBookRequest.getBookId()));
     }
 }

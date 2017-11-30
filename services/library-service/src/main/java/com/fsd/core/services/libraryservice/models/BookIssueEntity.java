@@ -25,11 +25,11 @@ public class BookIssueEntity {
     @Column(name = "ID", length = 8, unique = true, nullable = false)
     private Integer id;
 
-    @JoinColumn(name = "BOOK_ID", insertable = false, updatable = false)
+    @JoinColumn(name = "BOOK_ID", insertable = true, updatable = true)
     @OneToOne(fetch = FetchType.EAGER)
     private BookEntity bookEntity;
     @ManyToOne
-    @JoinColumn(name = "USER_ID", insertable = false, updatable = false)
+    @JoinColumn(name = "USER_ID")
     private UserEntity userEntity;
 
     @Column(name = "ISSUED_ON")
