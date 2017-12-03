@@ -1,19 +1,22 @@
 version: '3'
 
 services:
-  mysql:
-    image: mysql
-    container_name: mysql-db
+  library:
+    image: fsdapps/library-service:0.0.1-SNAPSHOT
+    container_name: library
     ports:
-      - 3306:3306
+    - 8080
     environment:
-      MYSQL_ROOT_PASSWORD: "fsd"
-      MYSQL_DATABASE: "fsd"
-      MYSQL_USER: "fsd"
-      MYSQL_PASSWORD: "fsd"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    restart: always
+    - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    - SPRING_PROFILES_ACTIVE=docker
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+    - fsd
 
-volumes:
-  mysql_data:
+networks:
+  fsd:
+    driver: bridge

@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class BookResponseDTO {
-    private String bookName;
+    private String title;
     private String description;
     private String author;
+    private String imageUrl;
 }

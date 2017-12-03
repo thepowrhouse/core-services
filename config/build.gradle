@@ -101,7 +101,7 @@ repositories {
 		url 'http://maven.springframework.org/release'
 	}
 }
-group 'com.fsd.support-services.config'
+group 'com.fsd.core-services.config'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
