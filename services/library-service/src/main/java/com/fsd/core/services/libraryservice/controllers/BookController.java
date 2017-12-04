@@ -1,5 +1,6 @@
 package com.fsd.core.services.libraryservice.controllers;
 
+import com.fsd.core.services.libraryservice.exception.ResourceNotFoundException;
 import com.fsd.core.services.libraryservice.models.dto.BookDTO;
 import com.fsd.core.services.libraryservice.models.dto.UserDTO;
 import com.fsd.core.services.libraryservice.services.BookService;
@@ -73,7 +74,7 @@ public class BookController {
     public ResponseEntity<BookDTO> getBookById(@PathVariable(value = "id") Integer bookId) {
         BookDTO book = bookService.findById(bookId);
         if (book == null) {
-            return ResponseEntity.notFound().build();
+            throw new ResourceNotFoundException(bookId,"Book not found");
         }
         return ResponseEntity.ok().body(book);
     }
@@ -114,7 +115,7 @@ public class BookController {
     public ResponseEntity<BookDTO> deleteBook(@PathVariable(value = "id") Integer bookId) {
         BookDTO book = bookService.findById(bookId);
         if (book == null) {
-            return ResponseEntity.notFound().build();
+            throw new ResourceNotFoundException(bookId,"Book not found");
         }
         bookService.delete(book);
         return ResponseEntity.ok().build();

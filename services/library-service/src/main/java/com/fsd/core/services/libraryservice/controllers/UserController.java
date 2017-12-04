@@ -1,5 +1,6 @@
 package com.fsd.core.services.libraryservice.controllers;
 
+import com.fsd.core.services.libraryservice.exception.ResourceNotFoundException;
 import com.fsd.core.services.libraryservice.models.dto.UserDTO;
 import com.fsd.core.services.libraryservice.services.UserService;
 import io.swagger.annotations.Api;
@@ -72,7 +73,7 @@ public class UserController {
     public ResponseEntity<UserDTO> getUserById(@PathVariable(value = "id") Integer userId) {
         UserDTO user = userService.findById(userId);
         if (user == null) {
-            return ResponseEntity.notFound().build();
+            throw new ResourceNotFoundException(userId,"User not found");
         }
         return ResponseEntity.ok().body(user);
     }
@@ -119,7 +120,7 @@ public class UserController {
     public ResponseEntity<UserDTO> deleteUser(@PathVariable(value = "id") Integer userId) {
         UserDTO user = userService.findById(userId);
         if (user == null) {
-            return ResponseEntity.notFound().build();
+            throw new ResourceNotFoundException(userId,"User not found");
         }
         userService.delete(user);
         return ResponseEntity.ok().build();

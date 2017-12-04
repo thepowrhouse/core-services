@@ -1,7 +1,7 @@
 package com.fsd.core.services.libraryservice.services;
 
+import com.fsd.core.services.libraryservice.exception.UnprocessableRequestException;
 import com.fsd.core.services.libraryservice.models.BookEntity;
-import com.fsd.core.services.libraryservice.exception.MyResourceNotFoundException;
 import com.fsd.core.services.libraryservice.models.dto.BookDTO;
 import com.fsd.core.services.libraryservice.repo.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class BookServiceImpl implements BookService {
             }
         });
         if (page > dtoPage.getTotalPages()) {
-            throw new MyResourceNotFoundException();
+            throw new UnprocessableRequestException("unable to process books pagination request");
         }
         return dtoPage;
     }

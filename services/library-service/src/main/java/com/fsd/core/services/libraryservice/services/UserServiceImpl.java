@@ -1,7 +1,7 @@
 package com.fsd.core.services.libraryservice.services;
 
+import com.fsd.core.services.libraryservice.exception.UnprocessableRequestException;
 import com.fsd.core.services.libraryservice.models.UserEntity;
-import com.fsd.core.services.libraryservice.exception.MyResourceNotFoundException;
 import com.fsd.core.services.libraryservice.models.dto.UserDTO;
 import com.fsd.core.services.libraryservice.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
             }
         });
         if (page > dtoPage.getTotalPages()) {
-            throw new MyResourceNotFoundException();
+            throw new UnprocessableRequestException("unable to process users pagination request");
         }
         return dtoPage;
     }
