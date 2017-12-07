@@ -2,6 +2,7 @@ package com.fsd.core.services.libraryservice.controllers;
 
 import com.fsd.core.services.libraryservice.models.dto.BookResponseDTO;
 import com.fsd.core.services.libraryservice.services.LibraryService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.jsondoc.core.annotation.ApiBodyObject;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
+@Api(value="library management tasks", description="Operations regarding library books management")
 public class LibraryController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -28,7 +30,7 @@ public class LibraryController {
     LibraryService libraryService;
 
     // Get Book
-    @ApiParams(queryparams = {@ApiQueryParam(name = "bookName", description = "Book Name", required = true)})
+    @ApiParams(queryparams = {@ApiQueryParam(name = "title", description = "Title", required = true)})
     @ApiMethod(produces = MediaType.APPLICATION_JSON_VALUE)
 
     @ApiResponses(value = {
