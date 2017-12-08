@@ -17,6 +17,8 @@ public class UserIssuesTransformer {
         userIssuesDTO.setFine(bookIssueEntity.getFine());
         userIssuesDTO.setIssuedOn(bookIssueEntity.getIssuedOn());
         userIssuesDTO.setReturnedDate(bookIssueEntity.getReturnedDate());
+        userIssuesDTO.setCreatedAt(bookIssueEntity.getCreatedAt());
+        userIssuesDTO.setUpdatedAt(bookIssueEntity.getUpdatedAt());
         return userIssuesDTO;
     }
 }

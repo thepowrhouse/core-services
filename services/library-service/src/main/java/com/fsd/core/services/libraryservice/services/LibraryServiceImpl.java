@@ -37,6 +37,8 @@ public class LibraryServiceImpl implements LibraryService {
         Date dueDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24) * numberOfDaysToExpire);
         bookIssueEntity.setDueDate(dueDate);
         bookIssueEntity.setFine(0);
+        bookIssueEntity.setCreatedAt(new Date());
+        bookIssueEntity.setUpdatedAt(new Date());
         bookIssueRepository.save(bookIssueEntity);
     }
 

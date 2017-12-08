@@ -19,6 +19,8 @@ public class UserTransformer {
         userDTO.setUseremail(userEntity.getUseremail());
         userDTO.setRole(userEntity.getRole());
         userDTO.setUserIssuesDTOList(userEntity.getCurrentIssues().stream().map(UserIssuesTransformer::toUserIssuesDTO).collect(Collectors.toList()));
+        userDTO.setCreatedAt(userEntity.getCreatedAt());
+        userDTO.setUpdatedAt(userEntity.getUpdatedAt());
         return userDTO;
     }
 
@@ -28,6 +30,8 @@ public class UserTransformer {
         userEntity.setPassword(userDTO.getPassword());
         userEntity.setUseremail(userDTO.getUseremail());
         userEntity.setRole(userDTO.getRole());
+        userEntity.setCreatedAt(new java.util.Date());
+        userEntity.setUpdatedAt(new java.util.Date());
         return userEntity;
     }
 
