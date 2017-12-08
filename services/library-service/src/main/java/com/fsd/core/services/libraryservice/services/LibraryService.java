@@ -1,9 +1,8 @@
 package com.fsd.core.services.libraryservice.services;
 
-import com.fsd.core.services.libraryservice.models.dto.BookResponseDTO;
-
 public interface LibraryService {
-    BookResponseDTO findBookByTitle(String bookName);
 
-    BookResponseDTO save(BookResponseDTO book);
+    public void issueBook(Integer bookId, Integer userId);
+
+    public void releaseBook(Integer bookId, Integer userId);
 }

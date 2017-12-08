@@ -1,8 +1,9 @@
 package com.fsd.core.services.libraryservice.controllers;
 
-import com.fsd.core.services.libraryservice.models.dto.BookResponseDTO;
+import com.fsd.core.services.libraryservice.models.dto.*;
 import com.fsd.core.services.libraryservice.services.LibraryService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.jsondoc.core.annotation.ApiBodyObject;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.VndErrors;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -29,41 +31,34 @@ public class LibraryController {
     @Autowired
     LibraryService libraryService;
 
-    // Get Book
-    @ApiParams(queryparams = {@ApiQueryParam(name = "title", description = "Title", required = true)})
-    @ApiMethod(produces = MediaType.APPLICATION_JSON_VALUE)
-
+    @ApiOperation(value = "Issues a book to the user",response = IssueBookResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Response OK", response = BookResponseDTO.class),
+            @ApiResponse(code = 200, message = "Response OK with IssueBookResponse as Response", response = ResponseEntity.class),
             @ApiResponse(code = 400, message = "Input Exception", response = VndErrors.class),
             @ApiResponse(code = 401, message = "Unauthorized Exception", response = VndErrors.class),
             @ApiResponse(code = 404, message = "Resource Not Found Exception", response = VndErrors.class),
             @ApiResponse(code = 500, message = "Internal Service Exception", response = VndErrors.class)
 
     })
-    //@PreAuthorize("#oauth2.hasScope('Admin')")
-    @RequestMapping(value = "/books", method = RequestMethod.GET)
-    public BookResponseDTO findBookByName(@RequestParam(required = true) String title) {
+    @PostMapping("/issueBook")
+    public ResponseEntity<IssueBookResponse> issueBook(@RequestBody(required = true) IssueBookRequest issueBookRequest) {
+        libraryService.issueBook(issueBookRequest.getBookId(), issueBookRequest.getUserId());
 
-        logger.info("Get Book for Name : {} ", title);
-
-        return libraryService.findBookByTitle(title);
+        return ResponseEntity.ok().body(new IssueBookResponse(issueBookRequest.getUserId(), issueBookRequest.getBookId()));
     }
 
-    // Create Book
-    @ApiBodyObject(clazz = BookResponseDTO.class)
-    @ApiMethod(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Releases a book from the user",response = ReleaseBookResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Response OK", response = BookResponseDTO.class),
+            @ApiResponse(code = 200, message = "Response OK with IssueBookResponse as Response", response = ResponseEntity.class),
             @ApiResponse(code = 400, message = "Input Exception", response = VndErrors.class),
             @ApiResponse(code = 401, message = "Unauthorized Exception", response = VndErrors.class),
             @ApiResponse(code = 404, message = "Resource Not Found Exception", response = VndErrors.class),
             @ApiResponse(code = 500, message = "Internal Service Exception", response = VndErrors.class)
 
     })
-    //@PreAuthorize("#oauth2.hasScope('Admin')")
-    @RequestMapping(value = "/books", method = POST, produces = "application/json")
-    public BookResponseDTO create(@RequestBody BookResponseDTO book) {
-        return libraryService.save(book);
+    @PostMapping("/releaseBook")
+    public ResponseEntity<ReleaseBookResponse> releaseBook(@RequestBody ReleaseBookRequest releaseBookRequest) {
+        libraryService.releaseBook(releaseBookRequest.getBookId(), releaseBookRequest.getUserId());
+        return ResponseEntity.ok().body(new ReleaseBookResponse(releaseBookRequest.getUserId(), releaseBookRequest.getBookId()));
     }
 }

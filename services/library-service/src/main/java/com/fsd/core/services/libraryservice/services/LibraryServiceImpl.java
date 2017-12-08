@@ -1,36 +1,52 @@
 package com.fsd.core.services.libraryservice.services;
 
-import com.fsd.core.services.libraryservice.models.Book;
+import com.fsd.core.services.libraryservice.models.BookEntity;
+import com.fsd.core.services.libraryservice.models.BookIssueEntity;
+import com.fsd.core.services.libraryservice.models.UserEntity;
 import com.fsd.core.services.libraryservice.models.dto.BookResponseDTO;
+import com.fsd.core.services.libraryservice.repo.BookIssueRepository;
+import com.fsd.core.services.libraryservice.repo.UserRepository;
 import com.fsd.core.services.libraryservice.repository.BookRepository;
-import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
+import javax.transaction.Transactional;
+import java.util.Date;
 
 @Component
 public class LibraryServiceImpl implements LibraryService {
 
-    @Resource
-    private BookRepository repository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    BookRepository bookRepository;
+    @Autowired
+    BookIssueRepository bookIssueRepository;
+
+    int numberOfDaysToExpire = 15;
 
     @Override
-    public BookResponseDTO findBookByTitle(String bookName) {
-        Book book = repository.findByTitle(bookName);
-        BookResponseDTO bookResponseDTO = new BookResponseDTO();
-        if (null != book) {
-            BeanUtils.copyProperties(book, bookResponseDTO);
-            return bookResponseDTO;
-        }
-        throw new RuntimeException("Book not fount:" + bookName);
+    @Transactional
+    public void issueBook(Integer bookId, Integer userId) {
+        UserEntity userEntity = userRepository.findOne(userId);
+        BookEntity bookEntity =
+                bookRepository.findOne(bookId);
+        BookIssueEntity bookIssueEntity = new BookIssueEntity();
+        bookIssueEntity.setBookEntity(bookEntity);
+        bookIssueEntity.setUserEntity(userEntity);
+        bookIssueEntity.setIssuedOn(new Date());
+        Date dueDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24) * numberOfDaysToExpire);
+        bookIssueEntity.setDueDate(dueDate);
+        bookIssueEntity.setFine(0);
+        bookIssueRepository.save(bookIssueEntity);
     }
 
     @Override
-    public BookResponseDTO save(BookResponseDTO bookResponseDTO) {
-        Book book = new Book();
-        BeanUtils.copyProperties(bookResponseDTO, book);
-        BookResponseDTO responseDTO = new BookResponseDTO();
-        BeanUtils.copyProperties(repository.save(book), responseDTO);
-        return responseDTO;
+    public void releaseBook(Integer bookId, Integer userId) {
+        UserEntity userEntity = userRepository.findOne(userId);
+        BookEntity bookEntity =
+                bookRepository.findOne(bookId);
+        BookIssueEntity bookIssueEntity = bookIssueRepository.findByBookEntityIdAndUserEntityId(bookId, userId);
+        bookIssueRepository.delete(bookIssueEntity);
     }
 }
