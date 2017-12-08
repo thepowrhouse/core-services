@@ -1,4 +1,4 @@
-package com.fsd.core.services.libraryservice.repo;
+package com.fsd.core.services.libraryservice.repository;
 
 import com.fsd.core.services.libraryservice.models.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

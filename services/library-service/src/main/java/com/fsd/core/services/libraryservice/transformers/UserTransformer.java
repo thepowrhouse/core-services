@@ -18,9 +18,7 @@ public class UserTransformer {
         userDTO.setPassword(userEntity.getPassword());
         userDTO.setUseremail(userEntity.getUseremail());
         userDTO.setRole(userEntity.getRole());
-        userDTO.setUserIssuesDTOList(userEntity.getCurrentIssues().stream().map(bookIssueEntity -> {
-            return UserIssuesTransformer.toUserIssuesDTO(bookIssueEntity);
-        }).collect(Collectors.toList()));
+        userDTO.setUserIssuesDTOList(userEntity.getCurrentIssues().stream().map(UserIssuesTransformer::toUserIssuesDTO).collect(Collectors.toList()));
         return userDTO;
     }
 

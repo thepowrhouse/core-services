@@ -22,7 +22,7 @@ public class BookEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "ID", length = 8, unique = true, nullable = false)
+    @Column(name = "BookId", length = 8, unique = true, nullable = false)
     private Integer id;
 
     @Column(name = "ISBN", nullable = false, unique = true)

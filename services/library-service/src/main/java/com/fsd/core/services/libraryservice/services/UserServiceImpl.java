@@ -3,9 +3,8 @@ package com.fsd.core.services.libraryservice.services;
 import com.fsd.core.services.libraryservice.exception.UnprocessableRequestException;
 import com.fsd.core.services.libraryservice.models.UserEntity;
 import com.fsd.core.services.libraryservice.models.dto.UserDTO;
-import com.fsd.core.services.libraryservice.repo.UserRepository;
+import com.fsd.core.services.libraryservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -27,18 +26,11 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<UserDTO> findAll() {
-        return userRepository.findAll().stream().map(userEntity -> {
-            return toUserDTO(userEntity);
-        }).collect(Collectors.toList());
+        return userRepository.findAll().stream().map(userEntity -> toUserDTO(userEntity)).collect(Collectors.toList());
     }
 
     public Page<UserDTO> findWithPagination(int page, int size) {
-        Page<UserDTO> dtoPage = userRepository.findAll(new PageRequest(page, size)).map(new Converter<UserEntity, UserDTO>() {
-            @Override
-            public UserDTO convert(UserEntity userEntity) {
-                return toUserDTO(userEntity);
-            }
-        });
+        Page<UserDTO> dtoPage = userRepository.findAll(new PageRequest(page, size)).map(userEntity -> toUserDTO(userEntity));
         if (page > dtoPage.getTotalPages()) {
             throw new UnprocessableRequestException("unable to process users pagination request");
         }

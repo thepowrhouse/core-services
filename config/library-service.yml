@@ -14,7 +14,7 @@ spring:
   profiles: local
   jpa.hibernate.ddl-auto: create
   datasource:
-    url: jdbc:mysql://localhost:3306/fsd
+    url: jdbc:mysql://localhost:3306/fsd?createDatabaseIfNotExist=true
     username: fsd
     password: fsd
 eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
@@ -23,7 +23,7 @@ spring:
   profiles: docker
   jpa.hibernate.ddl-auto: create
   datasource:
-    url: jdbc:mysql://mysql:3306/fsd
+    url: jdbc:mysql://mysql:3306/fsd?createDatabaseIfNotExist=true
     username: fsd
     password: fsd
 #security:

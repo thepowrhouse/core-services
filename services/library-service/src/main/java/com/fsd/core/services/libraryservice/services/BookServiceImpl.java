@@ -3,9 +3,9 @@ package com.fsd.core.services.libraryservice.services;
 import com.fsd.core.services.libraryservice.exception.UnprocessableRequestException;
 import com.fsd.core.services.libraryservice.models.BookEntity;
 import com.fsd.core.services.libraryservice.models.dto.BookDTO;
-import com.fsd.core.services.libraryservice.repo.BookRepository;
+
+import com.fsd.core.services.libraryservice.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -27,18 +27,11 @@ public class BookServiceImpl implements BookService {
     }
 
     public List<BookDTO> findAll() {
-        return bookRepository.findAll().stream().map(bookEntity -> {
-            return toBookDTO(bookEntity);
-        }).collect(Collectors.toList());
+        return bookRepository.findAll().stream().map(bookEntity -> toBookDTO(bookEntity)).collect(Collectors.toList());
     }
 
     public Page<BookDTO> findWithPagination(int page, int size) {
-        Page<BookDTO> dtoPage = bookRepository.findAll(new PageRequest(page, size)).map(new Converter<BookEntity, BookDTO>() {
-            @Override
-            public BookDTO convert(BookEntity bookEntity) {
-                return toBookDTO(bookEntity);
-            }
-        });
+        Page<BookDTO> dtoPage = bookRepository.findAll(new PageRequest(page, size)).map(bookEntity -> toBookDTO(bookEntity));
         if (page > dtoPage.getTotalPages()) {
             throw new UnprocessableRequestException("unable to process books pagination request");
         }

@@ -3,9 +3,8 @@ package com.fsd.core.services.libraryservice.services;
 import com.fsd.core.services.libraryservice.models.BookEntity;
 import com.fsd.core.services.libraryservice.models.BookIssueEntity;
 import com.fsd.core.services.libraryservice.models.UserEntity;
-import com.fsd.core.services.libraryservice.models.dto.BookResponseDTO;
-import com.fsd.core.services.libraryservice.repo.BookIssueRepository;
-import com.fsd.core.services.libraryservice.repo.UserRepository;
+import com.fsd.core.services.libraryservice.repository.BookIssueRepository;
+import com.fsd.core.services.libraryservice.repository.UserRepository;
 import com.fsd.core.services.libraryservice.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,9 +42,6 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void releaseBook(Integer bookId, Integer userId) {
-        UserEntity userEntity = userRepository.findOne(userId);
-        BookEntity bookEntity =
-                bookRepository.findOne(bookId);
         BookIssueEntity bookIssueEntity = bookIssueRepository.findByBookEntityIdAndUserEntityId(bookId, userId);
         bookIssueRepository.delete(bookIssueEntity);
     }

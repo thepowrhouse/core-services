@@ -91,7 +91,7 @@ public class BookController {
             @ApiResponse(code = 500, message = "Internal Service Exception", response = VndErrors.class)
 
     })
-    @GetMapping("/{id}")
+    @GetMapping("/title/{id}")
     public ResponseEntity<BookDTO> getBookByTitle(@PathVariable(value = "title") String title) {
         BookDTO book = bookService.findByTitle(title);
         if (book == null) {
