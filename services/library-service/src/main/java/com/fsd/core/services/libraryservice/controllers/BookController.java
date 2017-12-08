@@ -79,6 +79,26 @@ public class BookController {
         return ResponseEntity.ok().body(book);
     }
 
+    @ApiOperation(value = "get book By title",response = UserDTO.class)
+    @ApiParams(queryparams = {@ApiQueryParam(name = "title", description = "book title", required = true)})
+    @ApiMethod(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Response OK with UserDTO as Response", response = ResponseEntity.class),
+            @ApiResponse(code = 400, message = "Input Exception", response = VndErrors.class),
+            @ApiResponse(code = 401, message = "Unauthorized Exception", response = VndErrors.class),
+            @ApiResponse(code = 404, message = "Resource Not Found Exception", response = VndErrors.class),
+            @ApiResponse(code = 500, message = "Internal Service Exception", response = VndErrors.class)
+
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<BookDTO> getBookByTitle(@PathVariable(value = "title") String title) {
+        BookDTO book = bookService.findByTitle(title);
+        if (book == null) {
+            throw new RuntimeException(String.format("Book by title '%s' not found",title));
+        }
+        return ResponseEntity.ok().body(book);
+    }
+
     @ApiOperation(value = "Add a new book",response = UserDTO.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Response OK with BookDTO as Response", response = ResponseEntity.class),
