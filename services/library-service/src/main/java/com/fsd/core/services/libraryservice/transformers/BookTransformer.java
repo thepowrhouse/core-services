@@ -17,6 +17,8 @@ public class BookTransformer {
         bookEntity.setCallnumber(bookDTO.getCallnumber());
         bookEntity.setPublisher(bookDTO.getPublisher());
         bookEntity.setYear_of_publication(bookDTO.getYear_of_publication());
+        bookEntity.setCreatedAt(new java.util.Date());
+        bookEntity.setUpdatedAt(new java.util.Date());
         return bookEntity;
     }
 
@@ -29,6 +31,8 @@ public class BookTransformer {
         bookDTO.setCallnumber(bookEntity.getCallnumber());
         bookDTO.setPublisher(bookEntity.getPublisher());
         bookDTO.setYear_of_publication(bookEntity.getYear_of_publication());
+        bookDTO.setCreatedAt(bookEntity.getCreatedAt());
+        bookDTO.setUpdatedAt(bookEntity.getUpdatedAt());
         return bookDTO;
     }
 }
