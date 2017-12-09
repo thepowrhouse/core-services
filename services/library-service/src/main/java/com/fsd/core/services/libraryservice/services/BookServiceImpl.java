@@ -49,7 +49,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDTO update(BookDTO bookDTO) {
-        BookEntity bookEntity = bookRepository.findByTitle(bookDTO.getTitle());
+        BookEntity bookEntity = bookRepository.findOne(bookDTO.getId());
         bookEntity.setIsbn(bookDTO.getIsbn());
         bookEntity.setAuthor(bookDTO.getAuthor());
         bookEntity.setTitle(bookDTO.getTitle());
