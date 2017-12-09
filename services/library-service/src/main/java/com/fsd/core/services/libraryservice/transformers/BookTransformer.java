@@ -1,11 +1,16 @@
 package com.fsd.core.services.libraryservice.transformers;
 
+import com.fsd.core.services.libraryservice.exception.ResourceNotFoundException;
 import com.fsd.core.services.libraryservice.models.BookEntity;
 import com.fsd.core.services.libraryservice.models.dto.BookDTO;
 
 public class BookTransformer {
 
     public static BookEntity toBookEntity(BookDTO bookDTO) {
+
+        if (bookDTO == null) {
+            throw new ResourceNotFoundException(1,"No Books Found");
+        }
 
         BookEntity bookEntity = new BookEntity();
         bookEntity.setIsbn(bookDTO.getIsbn());
@@ -20,6 +25,11 @@ public class BookTransformer {
     }
 
     public static BookDTO toBookDTO(BookEntity bookEntity) {
+
+        if (bookEntity == null) {
+            throw new ResourceNotFoundException(1,"No Books Found");
+        }
+
         BookDTO bookDTO = new BookDTO();
         bookDTO.setId(bookEntity.getId());
         bookDTO.setIsbn(bookEntity.getIsbn());

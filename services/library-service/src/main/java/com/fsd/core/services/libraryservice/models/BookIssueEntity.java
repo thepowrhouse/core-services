@@ -19,7 +19,7 @@ public class BookIssueEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "issueId", length = 8, unique = true, nullable = false)
+    @Column(name = "ISSUE_ID", length = 8, unique = true, nullable = false)
     private Integer id;
 
     @JoinColumn(name = "BOOK_ID", insertable = true, updatable = true)

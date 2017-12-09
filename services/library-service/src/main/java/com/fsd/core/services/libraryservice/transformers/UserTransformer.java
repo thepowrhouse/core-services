@@ -1,5 +1,7 @@
 package com.fsd.core.services.libraryservice.transformers;
 
+import com.fsd.core.services.libraryservice.exception.ResourceNotFoundException;
+import com.fsd.core.services.libraryservice.exception.UnprocessableRequestException;
 import com.fsd.core.services.libraryservice.models.UserEntity;
 import com.fsd.core.services.libraryservice.models.dto.UserDTO;
 
@@ -8,6 +10,10 @@ import java.util.stream.Collectors;
 public class UserTransformer {
 
     public static UserDTO toUserDTO(UserEntity userEntity) {
+
+        if (userEntity == null) {
+            throw new ResourceNotFoundException(1,"No Users Found");
+        }
 
         UserDTO userDTO = new UserDTO();
         userDTO.setId(userEntity.getId());
@@ -22,6 +28,11 @@ public class UserTransformer {
     }
 
     public static UserEntity toUserEntity(UserDTO userDTO) {
+
+        if (userDTO == null) {
+            throw new ResourceNotFoundException(1,"No Users Found");
+        }
+
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(userDTO.getUsername());
         userEntity.setPassword(userDTO.getPassword());

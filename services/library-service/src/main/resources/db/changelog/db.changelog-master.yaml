@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: books
             columns:
               - column:
-                  name: bookId
+                  name: book_id
                   type: int
                   autoIncrement: true
                   constraints:
@@ -20,6 +20,16 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: isbn
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: publisher
                   type: varchar(255)
                   constraints:
                     nullable: false
@@ -57,6 +67,12 @@ databaseChangeLog:
                   name: isbn
                   value: isbn1
               - column:
+                  name: title
+                  value: title1
+              - column:
+                  name: publisher
+                  value: publisher1
+              - column:
                   name: year_of_publication
                   value: 2017
               - column:
@@ -76,7 +92,7 @@ databaseChangeLog:
             tableName: users
             columns:
               - column:
-                  name: userId
+                  name: user_id
                   type: int
                   autoIncrement: true
                   constraints:
@@ -145,7 +161,7 @@ databaseChangeLog:
             tableName: book_issues
             columns:
               - column:
-                  name: issueId
+                  name: issue_id
                   type: int
                   autoIncrement: true
                   constraints:
