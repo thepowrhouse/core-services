@@ -9,9 +9,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by fayaz on 28-11-2017.
- */
 @Data
 @Entity
 @Table(name = "BOOK_ISSUES")

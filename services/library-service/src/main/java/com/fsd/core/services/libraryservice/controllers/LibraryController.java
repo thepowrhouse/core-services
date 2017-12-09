@@ -1,24 +1,22 @@
 package com.fsd.core.services.libraryservice.controllers;
 
-import com.fsd.core.services.libraryservice.models.dto.*;
+import com.fsd.core.services.libraryservice.models.dto.IssueBookRequest;
+import com.fsd.core.services.libraryservice.models.dto.IssueBookResponse;
+import com.fsd.core.services.libraryservice.models.dto.ReleaseBookRequest;
+import com.fsd.core.services.libraryservice.models.dto.ReleaseBookResponse;
 import com.fsd.core.services.libraryservice.services.LibraryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.jsondoc.core.annotation.ApiBodyObject;
-import org.jsondoc.core.annotation.ApiMethod;
-import org.jsondoc.core.annotation.ApiParams;
-import org.jsondoc.core.annotation.ApiQueryParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.VndErrors;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Api(value="library management tasks", description="Operations regarding library books management")

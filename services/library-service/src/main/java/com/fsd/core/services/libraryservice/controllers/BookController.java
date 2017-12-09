@@ -22,9 +22,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by fayaz on 29-11-2017.
- */
 @RestController
 @RequestMapping("/books")
 @Api(value="book operations", description="Operations pertaining to books management")

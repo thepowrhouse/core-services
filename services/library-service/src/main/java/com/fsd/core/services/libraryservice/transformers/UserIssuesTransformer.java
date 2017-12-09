@@ -3,9 +3,6 @@ package com.fsd.core.services.libraryservice.transformers;
 import com.fsd.core.services.libraryservice.models.BookIssueEntity;
 import com.fsd.core.services.libraryservice.models.dto.UserIssuesDTO;
 
-/**
- * Created by fayaz on 29-11-2017.
- */
 public class UserIssuesTransformer {
 
     public static UserIssuesDTO toUserIssuesDTO(BookIssueEntity bookIssueEntity) {

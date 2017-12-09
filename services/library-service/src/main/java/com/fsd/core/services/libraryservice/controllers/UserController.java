@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by fayaz on 29-11-2017.
- */
 @RestController
 @RequestMapping("/users")
 @Api(value="user operations", description="Operations pertaining to user management")

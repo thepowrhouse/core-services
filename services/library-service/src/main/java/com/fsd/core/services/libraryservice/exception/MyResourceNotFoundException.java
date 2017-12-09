@@ -1,8 +1,5 @@
 package com.fsd.core.services.libraryservice.exception;
 
-/**
- * Created by fayaz on 28-11-2017.
- */
 public class MyResourceNotFoundException extends RuntimeException {
 
     /**

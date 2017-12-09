@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by fayaz on 28-11-2017.
- */
 @Data
 @Entity
 @Table(name = "USERS")

@@ -5,9 +5,6 @@ import com.fsd.core.services.libraryservice.models.dto.UserDTO;
 
 import java.util.stream.Collectors;
 
-/**
- * Created by fayaz on 29-11-2017.
- */
 public class UserTransformer {
 
     public static UserDTO toUserDTO(UserEntity userEntity) {
