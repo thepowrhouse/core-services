@@ -78,7 +78,7 @@ databaseChangeLog:
                   value: 9781449308162
               - column:
                   name: title
-                  value: JavaScript
+                  value: JavaScript: The Definitive Guide
               - column:
                   name: publisher
                   value: O'Reilly Media; 6 edition (18 April 2011)
@@ -93,7 +93,7 @@ databaseChangeLog:
                   value: 2017
               - column:
                   name: description
-                  value: The Definitive Guide
+                  value: A programmer's guide and comprehensive reference to the core language and to the client-side JavaScript APIs defined by web browsers.
               - column:
                   name: created_at
                   value: NOW()
@@ -167,7 +167,7 @@ databaseChangeLog:
                   value: 2017
               - column:
                   name: description
-                  value: Fast-track your web development skills to build high performance SPA with angular 4 and beyond
+                  value: Beginning Node.js is your step-by-step guide to learning all the aspects of creating maintainable Node.js applications.
               - column:
                   name: created_at
                   value: NOW()
@@ -297,3 +297,40 @@ databaseChangeLog:
                   type: datetime
                   constraints:
                     nullable: false
+  - changeSet:
+      id: 8
+      author: sujit
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: author
+                  value: Minko Gechev
+              - column:
+                  name: isbn
+                  value: 9781787125278
+              - column:
+                  name: title
+                  value: Getting started with Angular
+              - column:
+                  name: publisher
+                  value: Packt Publishing
+              - column:
+                  name: imageURL
+                  value: https://www.packtpub.com/sites/default/files/B06166.png
+              - column:
+                  name: status
+                  value: Available
+              - column:
+                  name: year_of_publication
+                  value: 2017
+              - column:
+                  name: description
+                  value: Fast-track your web development skills to build high performance SPA with angular 4 and beyond
+              - column:
+                  name: created_at
+                  value: NOW()
+              - column:
+                  name: updated_at
+                  value: NOW()
