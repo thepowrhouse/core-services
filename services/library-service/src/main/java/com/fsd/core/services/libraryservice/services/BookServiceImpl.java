@@ -53,9 +53,11 @@ public class BookServiceImpl implements BookService {
         bookEntity.setIsbn(bookDTO.getIsbn());
         bookEntity.setAuthor(bookDTO.getAuthor());
         bookEntity.setTitle(bookDTO.getTitle());
-        bookEntity.setCallnumber(bookDTO.getCallnumber());
+        bookEntity.setDescription(bookDTO.getDescription());
         bookEntity.setPublisher(bookDTO.getPublisher());
         bookEntity.setYear_of_publication(bookDTO.getYear_of_publication());
+        bookEntity.setImageURL(bookDTO.getImageURL());
+        bookEntity.setStatus(bookDTO.getStatus());
         bookEntity.setUpdatedAt(new java.util.Date());
         //Add updatable fields here
         return toBookDTO(bookRepository.save(bookEntity));

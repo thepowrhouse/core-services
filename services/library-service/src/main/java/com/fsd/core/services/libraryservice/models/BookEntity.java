@@ -31,11 +31,17 @@ public class BookEntity {
     @Column(name = "TITLE", nullable = false, unique = true)
     private String title;
 
-    @Column(name = "CALLNUMBER", length = 10)
-    private String callnumber;
+    @Column(name = "DESCRIPTION", length = 10)
+    private String description;
 
     @Column(name = "PUBLISHER", nullable = false)
     private String publisher;
+
+    @Column(name = "IMAGEURL", nullable = false)
+    private String imageURL;
+
+    @Column(name = "STATUS", nullable = false)
+    private String status;
 
     @Column(name = "YEAR_OF_PUBLICATION")
     private String year_of_publication;

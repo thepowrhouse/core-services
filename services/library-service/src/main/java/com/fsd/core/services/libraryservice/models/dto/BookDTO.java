@@ -14,9 +14,11 @@ public class BookDTO {
     private String isbn;
     private String author;
     private String title;
-    private String callnumber;
+    private String description;
     private String publisher;
     private String year_of_publication;
+    private String imageURL;
+    private String status;
     private Date createdAt;
     private Date updatedAt;
 

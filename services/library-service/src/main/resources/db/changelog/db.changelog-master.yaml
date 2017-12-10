@@ -34,12 +34,22 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: imageURL
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
                   name: year_of_publication
                   type: int
                   constraints:
                     nullable: false
               - column:
-                  name: callnumber
+                  name: description
                   type: varchar(255)
                   constraints:
                     nullable: false
@@ -62,22 +72,28 @@ databaseChangeLog:
             columns:
               - column:
                   name: author
-                  value: Author1
+                  value: David Flanagan
               - column:
                   name: isbn
-                  value: isbn1
+                  value: 9781449308162
               - column:
                   name: title
-                  value: title1
+                  value: JavaScript
               - column:
                   name: publisher
-                  value: publisher1
+                  value: O'Reilly Media; 6 edition (18 April 2011)
+              - column:
+                  name: imageURL
+                  value: http://twimgs.com/ddj/galleries/24/03_full.jpg
+              - column:
+                  name: status
+                  value: Available
               - column:
                   name: year_of_publication
                   value: 2017
               - column:
-                  name: callnumber
-                  value: call1
+                  name: description
+                  value: The Definitive Guide
               - column:
                   name: created_at
                   value: NOW()
@@ -86,6 +102,80 @@ databaseChangeLog:
                   value: NOW()
   - changeSet:
       id: 3
+      author: sujit
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: author
+                  value: Marijn Haverbeke
+              - column:
+                  name: isbn
+                  value: 9781593272937
+              - column:
+                  name: title
+                  value: Eloquent JavaScript
+              - column:
+                  name: publisher
+                  value: No Starch Press, 2011
+              - column:
+                  name: imageURL
+                  value: http://eloquentjavascript.net/img/cover.png
+              - column:
+                  name: status
+                  value: Available
+              - column:
+                  name: year_of_publication
+                  value: 2017
+              - column:
+                  name: description
+                  value: A Modern Introduction to Programming
+              - column:
+                  name: created_at
+                  value: NOW()
+              - column:
+                  name: updated_at
+                  value: NOW()
+  - changeSet:
+      id: 4
+      author: sujit
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: author
+                  value: Basarat Syed
+              - column:
+                  name: isbn
+                  value: 9781484201886
+              - column:
+                  name: title
+                  value: Beginning NodeJs
+              - column:
+                  name: publisher
+                  value: Apress; 1st ed. edition (4 December 2014)
+              - column:
+                  name: imageURL
+                  value: https://thenewboston.com/images/forum/upload/2015-04-01/e1e0d55413d6d6a2a372de81888a683e.png
+              - column:
+                  name: status
+                  value: Available
+              - column:
+                  name: year_of_publication
+                  value: 2017
+              - column:
+                  name: description
+                  value: Fast-track your web development skills to build high performance SPA with angular 4 and beyond
+              - column:
+                  name: created_at
+                  value: NOW()
+              - column:
+                  name: updated_at
+                  value: NOW()
+  - changeSet:
+      id: 5
       author: sujit
       changes:
         - createTable:
@@ -129,7 +219,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
   - changeSet:
-      id: 4
+      id: 6
       author: sujit
       changes:
         - insert:
@@ -154,7 +244,7 @@ databaseChangeLog:
                   name: updated_at
                   value: NOW()
   - changeSet:
-      id: 5
+      id: 7
       author: sujit
       changes:
         - createTable:
