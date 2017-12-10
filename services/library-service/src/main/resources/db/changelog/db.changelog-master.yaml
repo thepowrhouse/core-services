@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: 8
       author: sujit
       changes:
         - createTable:
@@ -64,7 +64,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
   - changeSet:
-      id: 2
+      id: 9
       author: sujit
       changes:
         - insert:
@@ -101,7 +101,7 @@ databaseChangeLog:
                   name: updated_at
                   value: NOW()
   - changeSet:
-      id: 3
+      id: 10
       author: sujit
       changes:
         - insert:
@@ -138,7 +138,7 @@ databaseChangeLog:
                   name: updated_at
                   value: NOW()
   - changeSet:
-      id: 4
+      id: 11
       author: sujit
       changes:
         - insert:
@@ -175,7 +175,7 @@ databaseChangeLog:
                   name: updated_at
                   value: NOW()
   - changeSet:
-      id: 5
+      id: 12
       author: sujit
       changes:
         - createTable:
@@ -229,7 +229,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
   - changeSet:
-      id: 6
+      id: 13
       author: sujit
       changes:
         - insert:
