@@ -78,7 +78,7 @@ databaseChangeLog:
                   value: 9781449308162
               - column:
                   name: title
-                  value: JavaScript: The Definitive Guide
+                  value: JavaScript- The Definitive Guide
               - column:
                   name: publisher
                   value: O'Reilly Media; 6 edition (18 April 2011)
