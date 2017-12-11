@@ -1,0 +1,33 @@
+info:
+  component: Library Service
+
+encrypt:
+  failOnError: false
+  key: abcdef
+
+spring:
+  application:
+    name: library-service
+  profiles:
+    active: local # very important!!! otherwise it will clone the master branch in inventory-config and mess everything up!!
+management:
+  security:
+    enabled: false
+---
+spring:
+  profiles: local
+  cloud:
+      config:
+        uri: http://localhost:8888
+        label: master
+        username: root
+        password: '{cipher}3fb2a2a25d3143ee052178842685af1a49a6e4d926c8bf44f8160c3609f7d1b6'
+---
+spring:
+  profiles: docker
+  cloud:
+      config:
+        uri: http://config:8888
+        label: master
+        username: root
+        password: '{cipher}3fb2a2a25d3143ee052178842685af1a49a6e4d926c8bf44f8160c3609f7d1b6'
