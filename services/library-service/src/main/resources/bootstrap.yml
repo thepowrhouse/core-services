@@ -31,3 +31,18 @@ spring:
         label: master
         username: root
         password: '{cipher}3fb2a2a25d3143ee052178842685af1a49a6e4d926c8bf44f8160c3609f7d1b6'
+---
+spring:
+  data:
+   mongodb:
+    uri : mongodb://192.168.99.100:27017/local
+---
+spring:
+  kafka:
+   serverConfig: 192.168.99.100:9092
+   commitinterval: 100
+   sessiontimeout: 15000
+   offsetreset: earliest
+   topic: bookStoreTopic
+   groupId: auditBookGroup
+   

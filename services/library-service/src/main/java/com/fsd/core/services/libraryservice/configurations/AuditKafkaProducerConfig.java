@@ -25,14 +25,14 @@ public class AuditKafkaProducerConfig {
     @Bean
     public Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.99.100:9092");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "${spring.kafka.serverConfig}");
         return props;
     }
 
     @Bean
     public KafkaTemplate<Integer, AuditEntity> workUnitsKafkaTemplate() {
         KafkaTemplate<Integer, AuditEntity> kafkaTemplate =  new KafkaTemplate<>(producerFactory());
-        kafkaTemplate.setDefaultTopic("bookStoreTopic");
+        kafkaTemplate.setDefaultTopic("${spring.kafka.topic}");
         return kafkaTemplate;
     }
 

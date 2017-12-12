@@ -41,7 +41,7 @@ public class AuditServiceImpl implements AuditService {
     private AuditRepository auditMongoRepository;
 
 
-    @KafkaListener(topics = "bookStoreTopic")
+    @KafkaListener(topics = "${spring.kafka.topic}")
     public void receiveAuditInfo(AuditEntity audit, @Header(KafkaHeaders.OFFSET) Integer offset,
                                  @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
                                  @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
