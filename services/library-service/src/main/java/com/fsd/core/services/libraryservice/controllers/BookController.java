@@ -1,8 +1,10 @@
 package com.fsd.core.services.libraryservice.controllers;
 
 import com.fsd.core.services.libraryservice.exception.ResourceNotFoundException;
+import com.fsd.core.services.libraryservice.models.AuditEntity;
 import com.fsd.core.services.libraryservice.models.dto.BookDTO;
 import com.fsd.core.services.libraryservice.models.dto.UserDTO;
+import com.fsd.core.services.libraryservice.services.AuditService;
 import com.fsd.core.services.libraryservice.services.BookService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -33,6 +36,9 @@ public class BookController {
 
     @Autowired
     BookService bookService;
+
+    @Autowired
+    AuditService auditService;
 
     @ApiOperation(value = "Get a list of all books",response = List.class)
     @GetMapping("")

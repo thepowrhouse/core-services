@@ -2,6 +2,7 @@ package com.fsd.core.services.libraryservice.configurations;
 
 import com.fsd.core.services.libraryservice.models.AuditEntity;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.apache.kafka.common.serialization.Serializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +18,8 @@ import java.util.Map;
 public class AuditKafkaProducerConfig {
 
     @Bean
-    public ProducerFactory<String, AuditEntity> producerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerConfigs(), stringKeySerializer(),objectAuditTrailSerializer());
+    public ProducerFactory<Integer, AuditEntity> producerFactory() {
+        return new DefaultKafkaProducerFactory<>(producerConfigs(), integerKeySerializer(),objectAuditTrailSerializer());
     }
 
     @Bean
@@ -29,15 +30,15 @@ public class AuditKafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, AuditEntity> workUnitsKafkaTemplate() {
-        KafkaTemplate<String, AuditEntity> kafkaTemplate =  new KafkaTemplate<>(producerFactory());
-        kafkaTemplate.setDefaultTopic("auditBook");
+    public KafkaTemplate<Integer, AuditEntity> workUnitsKafkaTemplate() {
+        KafkaTemplate<Integer, AuditEntity> kafkaTemplate =  new KafkaTemplate<>(producerFactory());
+        kafkaTemplate.setDefaultTopic("bookStoreTopic");
         return kafkaTemplate;
     }
 
     @Bean
-    public Serializer stringKeySerializer() {
-        return new StringSerializer();
+    public Serializer integerKeySerializer() {
+        return new IntegerSerializer();
     }
 
     @Bean
