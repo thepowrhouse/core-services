@@ -28,7 +28,7 @@ spring:
     username: fsd
     password: fsd
 
-eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+eureka.client.serviceUrl.defaultZone: http://172.26.116.76:8761/eureka/
 ---
 spring:
   profiles: docker
