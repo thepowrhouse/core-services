@@ -40,5 +40,14 @@ public class AuditEntity {
     @LastModifiedDate
     private Date updatedAt;
 
+    public AuditEntity(){
 
+    }
+
+    public AuditEntity(Integer id,String event, Date createdAt, Date updatedAt){
+        this.id = id;
+        this.createdAt = createdAt;
+        this.event = event;
+        this.updatedAt = updatedAt;
+    }
 }

@@ -36,6 +36,7 @@ public class AuditServiceImpl implements AuditService {
             return true;
         }catch(Exception e){
             logger.info("Failure");
+            e.printStackTrace();
             return false;
         }
 
@@ -45,7 +46,7 @@ public class AuditServiceImpl implements AuditService {
     private AuditRepository auditMongoRepository;
 
 
-    @KafkaListener(topics = "${spring.kafka.topic}")
+    @KafkaListener(topics = "bookStoreTopic")
     public void receiveAuditInfo(AuditEntity audit, @Header(KafkaHeaders.OFFSET) Integer offset,
                                  @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
                                  @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
