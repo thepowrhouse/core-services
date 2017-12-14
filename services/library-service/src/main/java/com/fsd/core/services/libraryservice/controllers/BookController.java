@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.hateoas.VndErrors;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class BookController {
 
     @ApiOperation(value = "Get a list of all books",response = List.class)
     @GetMapping("")
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN') or #oauth2.hasScope('PATRON')")
     public List<BookDTO> getAllBooks() {
         return bookService.findAll();
     }
@@ -53,6 +55,7 @@ public class BookController {
 
     })
     @RequestMapping(value = "/paginatedsearch", params = {"page", "size"})
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN') or #oauth2.hasScope('PATRON')")
     public Page<BookDTO> findPaginated(@RequestParam("page") int page, @RequestParam("size") int size) {
         return bookService.findWithPagination(page, size);
     }
@@ -69,6 +72,7 @@ public class BookController {
 
     })
     @GetMapping("/{id}")
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN') or #oauth2.hasScope('PATRON')")
     public ResponseEntity<BookDTO> getBookById(@PathVariable(value = "id") Integer bookId) {
         BookDTO book = bookService.findById(bookId);
         if (book == null) {
@@ -89,6 +93,7 @@ public class BookController {
 
     })
     @GetMapping("/title/{id}")
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN') or #oauth2.hasScope('PATRON')")
     public ResponseEntity<BookDTO> getBookByTitle(@PathVariable(value = "title") String title) {
         BookDTO book = bookService.findByTitle(title);
         if (book == null) {
@@ -107,6 +112,7 @@ public class BookController {
 
     })
     @PostMapping("/")
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN')")
     public BookDTO createBook(@RequestBody BookDTO book) {
         return bookService.create(book);
     }
@@ -114,6 +120,7 @@ public class BookController {
 
     @ApiOperation(value = "Update a book",response = UserDTO.class)
     @PutMapping("/{id}")
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN')")
     public ResponseEntity<BookDTO> updateBook(@PathVariable(value = "id") Integer bookId,
                                               @RequestBody BookDTO bookDTO) {
         return ResponseEntity.ok().body(bookService.update(bookDTO));
@@ -130,6 +137,7 @@ public class BookController {
 
     })
     @DeleteMapping("/{id}")
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN')")
     public ResponseEntity<BookDTO> deleteBook(@PathVariable(value = "id") Integer bookId) {
         BookDTO book = bookService.findById(bookId);
         if (book == null) {

@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.web.client.RestTemplate;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -23,11 +26,11 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @SpringBootApplication
 @EnableDiscoveryClient
 //Enable the Below for Auth
-//@EnableResourceServer
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableResourceServer
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableSwagger2
 public class LibraryServiceApplication
-        //extends ResourceServerConfigurerAdapter
+        extends ResourceServerConfigurerAdapter
 {
 
     private static final Logger log = LoggerFactory.getLogger(LibraryServiceApplication.class);

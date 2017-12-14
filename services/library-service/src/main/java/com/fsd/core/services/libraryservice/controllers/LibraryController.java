@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.VndErrors;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +40,7 @@ public class LibraryController {
 
     })
     @PostMapping("/issueBook")
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN')")
     public ResponseEntity<IssueBookResponse> issueBook(@RequestBody(required = true) IssueBookRequest issueBookRequest) {
         libraryService.issueBook(issueBookRequest.getBookId(), issueBookRequest.getUserId());
 
@@ -55,6 +57,7 @@ public class LibraryController {
 
     })
     @PostMapping("/releaseBook")
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN') or #oauth2.hasScope('PATRON')")
     public ResponseEntity<ReleaseBookResponse> releaseBook(@RequestBody ReleaseBookRequest releaseBookRequest) {
         libraryService.releaseBook(releaseBookRequest.getBookId(), releaseBookRequest.getUserId());
         return ResponseEntity.ok().body(new ReleaseBookResponse(releaseBookRequest.getUserId(), releaseBookRequest.getBookId()));

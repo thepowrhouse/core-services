@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.hateoas.VndErrors;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class UserController {
 
     @ApiOperation(value = "Get a list of all users",response = List.class)
     @GetMapping("")
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN')")
     public List<UserDTO> getAllUsers() {
         return userService.findAll();
     }
@@ -52,6 +54,7 @@ public class UserController {
 
     })
     @RequestMapping(value = "/paginatedsearch", params = {"page", "size"})
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN')")
     public Page<UserDTO> findPaginated(@RequestParam("page") int page, @RequestParam("size") int size) {
         return userService.findWithPagination(page, size);
     }
@@ -68,6 +71,7 @@ public class UserController {
 
     })
     @GetMapping("/{id}")
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN') or #oauth2.hasScope('PATRON')")
     public ResponseEntity<UserDTO> getUserById(@PathVariable(value = "id") Integer userId) {
         UserDTO user = userService.findById(userId);
         if (user == null) {
@@ -115,6 +119,7 @@ public class UserController {
 
     })
     @DeleteMapping("/{id}")
+    @PreAuthorize("#oauth2.hasScope('LIBRARIAN')")
     public ResponseEntity<UserDTO> deleteUser(@PathVariable(value = "id") Integer userId) {
         UserDTO user = userService.findById(userId);
         if (user == null) {
