@@ -15,18 +15,20 @@ spring:
   data:
    mongodb:
     uri : mongodb://172.26.116.76:27017/fsd
-  kafka:
-   serverConfig: localhost:9092
-   commitinterval: 100
-   sessiontimeout: 15000
-   offsetreset: earliest
-   topic: bookStoreTopic
-   groupId: auditBookGroup
   jpa.hibernate.ddl-auto: none
   datasource:
     url: jdbc:mysql://172.26.116.76:3306/fsd?createDatabaseIfNotExist=true
     username: fsd
     password: fsd
+
+kafka:
+  consumer:
+    bootstrap: 172.26.116.76:9092
+    group: auditBookGroup
+    topic: bookStoreTopic
+  producer:
+    bootstrap: localhost:9092
+    topic: workunits
 
 eureka.client.serviceUrl.defaultZone: http://172.26.116.76:8761/eureka/
 ---
