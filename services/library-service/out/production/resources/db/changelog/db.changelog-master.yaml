@@ -1,0 +1,267 @@
+databaseChangeLog:
+  - changeSet:
+      id: 8
+      author: sujit
+      changes:
+        - createTable:
+            tableName: books
+            columns:
+              - column:
+                  name: book_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: author
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: isbn
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: publisher
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: imageURL
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: year_of_publication
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 9
+      author: sujit
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: author
+                  value: David Flanagan
+              - column:
+                  name: isbn
+                  value: 9781449308162
+              - column:
+                  name: title
+                  value: JavaScript- The Definitive Guide
+              - column:
+                  name: publisher
+                  value: O'Reilly Media; 6 edition (18 April 2011)
+              - column:
+                  name: imageURL
+                  value: http://twimgs.com/ddj/galleries/24/03_full.jpg
+              - column:
+                  name: status
+                  value: Available
+              - column:
+                  name: year_of_publication
+                  value: 2017
+              - column:
+                  name: description
+                  value: A programmer's guide and comprehensive reference to the core language and to the client-side JavaScript APIs defined by web browsers.
+              - column:
+                  name: created_at
+                  value: NOW()
+              - column:
+                  name: updated_at
+                  value: NOW()
+  - changeSet:
+      id: 10
+      author: sujit
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: author
+                  value: Marijn Haverbeke
+              - column:
+                  name: isbn
+                  value: 9781593272937
+              - column:
+                  name: title
+                  value: Eloquent JavaScript
+              - column:
+                  name: publisher
+                  value: No Starch Press, 2011
+              - column:
+                  name: imageURL
+                  value: http://eloquentjavascript.net/img/cover.png
+              - column:
+                  name: status
+                  value: Available
+              - column:
+                  name: year_of_publication
+                  value: 2017
+              - column:
+                  name: description
+                  value: A Modern Introduction to Programming
+              - column:
+                  name: created_at
+                  value: NOW()
+              - column:
+                  name: updated_at
+                  value: NOW()
+  - changeSet:
+      id: 11
+      author: sujit
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: author
+                  value: Basarat Syed
+              - column:
+                  name: isbn
+                  value: 9781484201886
+              - column:
+                  name: title
+                  value: Beginning NodeJs
+              - column:
+                  name: publisher
+                  value: Apress; 1st ed. edition (4 December 2014)
+              - column:
+                  name: imageURL
+                  value: https://thenewboston.com/images/forum/upload/2015-04-01/e1e0d55413d6d6a2a372de81888a683e.png
+              - column:
+                  name: status
+                  value: Available
+              - column:
+                  name: year_of_publication
+                  value: 2017
+              - column:
+                  name: description
+                  value: Beginning Node.js is your step-by-step guide to learning all the aspects of creating maintainable Node.js applications.
+              - column:
+                  name: created_at
+                  value: NOW()
+              - column:
+                  name: updated_at
+                  value: NOW()
+  - changeSet:
+      id: 12
+      author: sujit
+      changes:
+        - createTable:
+            tableName: book_issues
+            columns:
+              - column:
+                  name: issue_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: book_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: issued_on
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: due_date
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: returned_date
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fine
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 13
+      author: sujit
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: author
+                  value: Minko Gechev
+              - column:
+                  name: isbn
+                  value: 9781787125278
+              - column:
+                  name: title
+                  value: Getting started with Angular
+              - column:
+                  name: publisher
+                  value: Packt Publishing
+              - column:
+                  name: imageURL
+                  value: https://www.packtpub.com/sites/default/files/B06166.png
+              - column:
+                  name: status
+                  value: Available
+              - column:
+                  name: year_of_publication
+                  value: 2017
+              - column:
+                  name: description
+                  value: Fast-track your web development skills to build high performance SPA with angular 4 and beyond
+              - column:
+                  name: created_at
+                  value: NOW()
+              - column:
+                  name: updated_at
+                  value: NOW()
