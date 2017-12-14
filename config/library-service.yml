@@ -12,15 +12,36 @@ spring:
 ---
 spring:
   profiles: local
+  data:
+   mongodb:
+    uri : mongodb://localhost:27017/fsd
+  kafka:
+   serverConfig: localhost:9092
+   commitinterval: 100
+   sessiontimeout: 15000
+   offsetreset: earliest
+   topic: bookStoreTopic
+   groupId: auditBookGroup
   jpa.hibernate.ddl-auto: none
   datasource:
     url: jdbc:mysql://localhost:3306/fsd?createDatabaseIfNotExist=true
     username: fsd
     password: fsd
+
 eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
 ---
 spring:
   profiles: docker
+  data:
+   mongodb:
+    uri : mongodb://mongodb:27017/fsd
+  kafka:
+   serverConfig: kafka:9092
+   commitinterval: 100
+   sessiontimeout: 15000
+   offsetreset: earliest
+   topic: bookStoreTopic
+   groupId: auditBookGroup
   jpa.hibernate.ddl-auto: none
   datasource:
     url: jdbc:mysql://mysql:3306/fsd?createDatabaseIfNotExist=true
