@@ -27,8 +27,8 @@ kafka:
     group: auditBookGroup
     topic: bookStoreTopic
   producer:
-    bootstrap: localhost:9092
-    topic: workunits
+    bootstrap: 172.26.116.76:9092
+    topic: bookStoreTopic
 
 eureka.client.serviceUrl.defaultZone: http://172.26.116.76:8761/eureka/
 ---
