@@ -14,10 +14,10 @@ spring:
   profiles: local
   data:
    mongodb:
-    uri : mongodb://172.26.116.76:27017/fsd
+    uri : mongodb://localhost:27017/fsd
   jpa.hibernate.ddl-auto: none
   datasource:
-    url: jdbc:mysql://172.26.116.76:3306/fsd?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/fsd?createDatabaseIfNotExist=true
     username: fsd
     password: fsd
 
@@ -25,18 +25,18 @@ security:
  oauth2:
    resource:
      jwt:
-       keyUri: http://172.26.116.76:9090/oauth/token_key
+       keyUri: http://localhost:9090/oauth/token_key
 
 kafka:
   consumer:
-    bootstrap: 172.26.116.76:9092
+    bootstrap: localhost:9092
     group: auditBookGroup
     topic: bookStoreTopic
   producer:
-    bootstrap: 172.26.116.76:9092
+    bootstrap: localhost:9092
     topic: bookStoreTopic
 
-eureka.client.serviceUrl.defaultZone: http://172.26.116.76:8761/eureka/
+eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
 ---
 spring:
   profiles: docker
