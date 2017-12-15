@@ -55,11 +55,11 @@ spring:
     url: jdbc:mysql://mysql:3306/fsd?createDatabaseIfNotExist=true
     username: fsd
     password: fsd
-#security:
- #oauth2:
-   #resource:
-     #jwt:
-       #keyUri: http://auth:9090/oauth/token_key
+security:
+ oauth2:
+   resource:
+     jwt:
+       keyUri: http://auth:9090/oauth/token_key
 ---
 eureka:
   instance:
