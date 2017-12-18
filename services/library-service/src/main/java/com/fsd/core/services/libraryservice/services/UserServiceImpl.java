@@ -1,6 +1,7 @@
 package com.fsd.core.services.libraryservice.services;
 
 import com.fsd.core.services.libraryservice.exception.UnprocessableRequestException;
+import com.fsd.core.services.libraryservice.models.AuditEntity;
 import com.fsd.core.services.libraryservice.models.UserEntity;
 import com.fsd.core.services.libraryservice.models.dto.UserDTO;
 import com.fsd.core.services.libraryservice.repository.UserRepository;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    private AuditMessagePublisher publisher;
 
     public UserDTO findUserByName(String userName) {
         return toUserDTO(userRepository.findByUsername(userName));
@@ -52,6 +57,12 @@ public class UserServiceImpl implements UserService {
         userEntity.setPassword(userDTO.getPassword());
         userEntity.setUseremail(userDTO.getUseremail());
         userEntity.setRole(userDTO.getRole());
+
+        AuditEntity auditEntity = new AuditEntity();
+        auditEntity.setEvent("USER_CREATED");
+        auditEntity.setCreatedAt(new Date());
+        publisher.sendAuditInfo(auditEntity);
+
         //Add updatable fields here
         return toUserDTO(userRepository.save(userEntity));
     }
@@ -59,6 +70,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO delete(UserDTO userDTO) {
         userRepository.delete(userDTO.getId());
+
+        AuditEntity auditEntity = new AuditEntity();
+        auditEntity.setEvent("USER_DELETED");
+        auditEntity.setUpdatedAt(new Date());
+        publisher.sendAuditInfo(auditEntity);
+
         return userDTO;
     }
 }
