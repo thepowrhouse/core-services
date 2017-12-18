@@ -3,9 +3,10 @@ package com.fsd.core.services.libraryservice.services;
 import com.fsd.core.services.libraryservice.models.BookEntity;
 import com.fsd.core.services.libraryservice.models.BookIssueEntity;
 import com.fsd.core.services.libraryservice.models.UserEntity;
+import com.fsd.core.services.libraryservice.models.dto.AuditDTO;
 import com.fsd.core.services.libraryservice.repository.BookIssueRepository;
-import com.fsd.core.services.libraryservice.repository.UserRepository;
 import com.fsd.core.services.libraryservice.repository.BookRepository;
+import com.fsd.core.services.libraryservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,9 @@ public class LibraryServiceImpl implements LibraryService {
 
     int numberOfDaysToExpire = 15;
 
+    @Autowired
+    private AuditMessagePublisher publisher;
+
     @Override
     @Transactional
     public void issueBook(Integer bookId, Integer userId) {
@@ -40,11 +44,13 @@ public class LibraryServiceImpl implements LibraryService {
         bookIssueEntity.setCreatedAt(new Date());
         bookIssueEntity.setUpdatedAt(new Date());
         bookIssueRepository.save(bookIssueEntity);
+        publisher.sendAuditInfo(new AuditDTO("BOOK_ISSUED"));
     }
 
     @Override
     public void releaseBook(Integer bookId, Integer userId) {
         BookIssueEntity bookIssueEntity = bookIssueRepository.findByBookEntityIdAndUserEntityId(bookId, userId);
         bookIssueRepository.delete(bookIssueEntity);
+        publisher.sendAuditInfo(new AuditDTO("BOOK_RELEASED"));
     }
 }

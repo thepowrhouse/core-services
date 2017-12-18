@@ -2,8 +2,8 @@ package com.fsd.core.services.libraryservice.services;
 
 import com.fsd.core.services.libraryservice.exception.UnprocessableRequestException;
 import com.fsd.core.services.libraryservice.models.BookEntity;
+import com.fsd.core.services.libraryservice.models.dto.AuditDTO;
 import com.fsd.core.services.libraryservice.models.dto.BookDTO;
-
 import com.fsd.core.services.libraryservice.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +21,8 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     BookRepository bookRepository;
+    @Autowired
+    private AuditMessagePublisher publisher;
 
     public BookDTO findByTitle(String bookName) {
         return toBookDTO(bookRepository.findByTitle(bookName));
@@ -44,6 +46,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDTO create(BookDTO bookDTO) {
+        publisher.sendAuditInfo(new AuditDTO("BOOK_ADDED"));
         return toBookDTO(bookRepository.save(toBookEntity(bookDTO)));
     }
 
@@ -60,12 +63,14 @@ public class BookServiceImpl implements BookService {
         bookEntity.setStatus(bookDTO.getStatus());
         bookEntity.setUpdatedAt(new java.util.Date());
         //Add updatable fields here
+        publisher.sendAuditInfo(new AuditDTO("BOOK_UPDATED"));
         return toBookDTO(bookRepository.save(bookEntity));
     }
 
     @Override
     public BookDTO delete(BookDTO bookDTO) {
         bookRepository.delete(bookDTO.getId());
+        publisher.sendAuditInfo(new AuditDTO("BOOK_DELETED"));
         return bookDTO;
     }
 }

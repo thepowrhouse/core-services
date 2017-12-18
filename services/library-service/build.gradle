@@ -37,7 +37,7 @@ dependencies {
     compile("org.liquibase:liquibase-core")
 
     //messaging
-    compile("org.springframework.cloud:spring-cloud-starter-stream-kafka:1.3.0.RELEASE")
+    compile("org.springframework.cloud:spring-cloud-starter-stream-kafka")
 
     //hystrix
     compile("org.springframework.cloud:spring-cloud-starter-hystrix")

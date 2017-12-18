@@ -16,9 +16,7 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public class AuditEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "AUDIT_ID", length = 8, unique = true, nullable = false)
-    private Integer id;
+    private String _id;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
@@ -41,10 +39,15 @@ public class AuditEntity {
 
     }
 
-    public AuditEntity(Integer id, String event, Date createdAt, Date updatedAt) {
-        this.id = id;
+    public AuditEntity(String event, Date createdAt, Date updatedAt) {
         this.createdAt = createdAt;
         this.event = event;
         this.updatedAt = updatedAt;
+    }
+
+    public AuditEntity(String event) {
+        this.createdAt = new Date();
+        this.event = event;
+        this.updatedAt = new Date();
     }
 }
