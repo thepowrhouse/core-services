@@ -27,15 +27,6 @@ security:
      jwt:
        keyUri: http://localhost:9090/oauth/token_key
 
-kafka:
-  consumer:
-    bootstrap: localhost:9092
-    group: auditBookGroup
-    topic: bookStoreTopic
-  producer:
-    bootstrap: localhost:9092
-    topic: bookStoreTopic
-
 eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
 ---
 spring:
@@ -43,13 +34,6 @@ spring:
   data:
    mongodb:
     uri : mongodb://mongodb:27017/fsd
-  kafka:
-   serverConfig: kafka:9092
-   commitinterval: 100
-   sessiontimeout: 15000
-   offsetreset: earliest
-   topic: bookStoreTopic
-   groupId: auditBookGroup
   jpa.hibernate.ddl-auto: none
   datasource:
     url: jdbc:mysql://mysql:3306/fsd?createDatabaseIfNotExist=true
