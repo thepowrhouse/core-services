@@ -5,6 +5,7 @@ import com.fsd.core.services.libraryservice.models.BookEntity;
 import com.fsd.core.services.libraryservice.models.dto.AuditDTO;
 import com.fsd.core.services.libraryservice.models.dto.BookDTO;
 import com.fsd.core.services.libraryservice.repository.BookRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +29,7 @@ public class BookServiceImpl implements BookService {
         return toBookDTO(bookRepository.findByTitle(bookName));
     }
 
+    @HystrixCommand
     public List<BookDTO> findAll() {
         return bookRepository.findAll().stream().map(bookEntity -> toBookDTO(bookEntity)).collect(Collectors.toList());
     }
@@ -45,12 +47,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @HystrixCommand
     public BookDTO create(BookDTO bookDTO) {
         publisher.sendAuditInfo(new AuditDTO("BOOK_ADDED"));
         return toBookDTO(bookRepository.save(toBookEntity(bookDTO)));
     }
 
     @Override
+    @HystrixCommand
     public BookDTO update(BookDTO bookDTO) {
         BookEntity bookEntity = bookRepository.findOne(bookDTO.getId());
         bookEntity.setIsbn(bookDTO.getIsbn());
@@ -68,6 +72,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @HystrixCommand
     public BookDTO delete(BookDTO bookDTO) {
         bookRepository.delete(bookDTO.getId());
         publisher.sendAuditInfo(new AuditDTO("BOOK_DELETED"));

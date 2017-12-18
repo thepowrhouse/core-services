@@ -7,6 +7,7 @@ import com.fsd.core.services.libraryservice.models.dto.AuditDTO;
 import com.fsd.core.services.libraryservice.repository.BookIssueRepository;
 import com.fsd.core.services.libraryservice.repository.BookRepository;
 import com.fsd.core.services.libraryservice.repository.UserRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +31,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     @Transactional
+    @HystrixCommand
     public void issueBook(Integer bookId, Integer userId) {
         UserEntity userEntity = userRepository.findOne(userId);
         BookEntity bookEntity =
@@ -48,6 +50,7 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
+    @HystrixCommand
     public void releaseBook(Integer bookId, Integer userId) {
         BookIssueEntity bookIssueEntity = bookIssueRepository.findByBookEntityIdAndUserEntityId(bookId, userId);
         bookIssueRepository.delete(bookIssueEntity);
