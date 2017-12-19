@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class LibraryServiceImpl implements LibraryService {
@@ -34,8 +35,7 @@ public class LibraryServiceImpl implements LibraryService {
     @HystrixCommand
     public void issueBook(Integer bookId, Integer userId) {
         UserEntity userEntity = userRepository.findOne(userId);
-        BookEntity bookEntity =
-                bookRepository.findOne(bookId);
+        BookEntity bookEntity = bookRepository.findOne(bookId);
         BookIssueEntity bookIssueEntity = new BookIssueEntity();
         bookIssueEntity.setBookEntity(bookEntity);
         bookIssueEntity.setUserEntity(userEntity);
@@ -45,15 +45,21 @@ public class LibraryServiceImpl implements LibraryService {
         bookIssueEntity.setFine(0);
         bookIssueEntity.setCreatedAt(new Date());
         bookIssueEntity.setUpdatedAt(new Date());
+        bookIssueEntity.setReturnedDate(new Date());
         bookIssueRepository.save(bookIssueEntity);
+        bookEntity.setStatus("Issued");
+        bookRepository.save(bookEntity);
         publisher.sendAuditInfo(new AuditDTO("BOOK_ISSUED"));
     }
 
     @Override
     @HystrixCommand
     public void releaseBook(Integer bookId, Integer userId) {
-        BookIssueEntity bookIssueEntity = bookIssueRepository.findByBookEntityIdAndUserEntityId(bookId, userId);
+        List<BookIssueEntity> bookIssueEntity = bookIssueRepository.findByBookEntityIdAndUserEntityId(bookId, userId);
         bookIssueRepository.delete(bookIssueEntity);
+        BookEntity bookEntity = bookRepository.findOne(bookId);
+        bookEntity.setStatus("Available");
+        bookRepository.save(bookEntity);
         publisher.sendAuditInfo(new AuditDTO("BOOK_RELEASED"));
     }
 }
