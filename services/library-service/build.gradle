@@ -32,6 +32,9 @@ dependencies {
     compile("org.springframework.security:spring-security-jwt")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile('mysql:mysql-connector-java')
+    compile("org.springframework.boot:spring-boot-starter-cache")
+    compile("com.hazelcast:hazelcast:3.7.4")
+    compile("com.hazelcast:hazelcast-spring:3.7.4")
 
     //Liquibase
     compile("org.liquibase:liquibase-core")

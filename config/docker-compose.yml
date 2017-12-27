@@ -3,7 +3,6 @@ version: '3'
 services:
   library:
     image: fsdapps/library-service:0.0.1-SNAPSHOT
-    container_name: library-service
     ports:
     - 9999
     environment:

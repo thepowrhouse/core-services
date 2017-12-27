@@ -7,6 +7,7 @@ import com.fsd.core.services.libraryservice.models.dto.BookDTO;
 import com.fsd.core.services.libraryservice.repository.BookRepository;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static com.fsd.core.services.libraryservice.transformers.BookTransformer.toBookDTO;
 import static com.fsd.core.services.libraryservice.transformers.BookTransformer.toBookEntity;
 
 @Service
 public class BookServiceImpl implements BookService {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     BookRepository bookRepository;
@@ -42,7 +48,9 @@ public class BookServiceImpl implements BookService {
         return dtoPage;
     }
 
+    @Cacheable("books")
     public BookDTO findById(Integer id) {
+        logger.info("Reading from DB");
         return toBookDTO(bookRepository.findOne(id));
     }
 

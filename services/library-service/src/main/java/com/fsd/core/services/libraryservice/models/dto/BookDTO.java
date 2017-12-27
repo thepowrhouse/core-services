@@ -2,13 +2,14 @@ package com.fsd.core.services.libraryservice.models.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by fayaz on 29-11-2017.
  */
 @Data
-public class BookDTO {
+public class BookDTO implements Serializable{
 
     private Integer id;
     private String isbn;
